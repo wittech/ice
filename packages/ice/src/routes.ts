@@ -27,7 +27,13 @@ export async function generateRoutesInfo(
   });
   await Promise.all(analyzeTasks);
 
-  const routes = formatNestedRouteManifest(routeManifest);
+  let routes = formatNestedRouteManifest(routeManifest);
+
+  // 新增：应用用户定义的 modifyRoutes 钩子
+  if (routesConfig.modifyRoutes) {
+    routes = routesConfig.modifyRoutes(routes);
+  }
+
   let routesCount = 0;
   Object.keys(routeManifest).forEach((key) => {
     const routeItem = routeManifest[key];

@@ -1,4 +1,4 @@
-import type { DefineRouteFunction, RouteItem } from '@ice/route-manifest';
+import type { DefineRouteFunction, NestedRouteManifest, RouteItem } from '@ice/route-manifest';
 import type { PluginList } from 'build-scripts';
 import type { UnpluginOptions } from '@ice/bundles/compiled/unplugin/index.js';
 import type { ProcessOptions } from '@ice/bundles';
@@ -163,6 +163,8 @@ export interface UserConfig {
      * Define route rules by route config.
      */
     config?: RouteItem[];
+    // 新增：路由修改钩子
+    modifyRoutes?: (routes: NestedRouteManifest[]) => NestedRouteManifest[];
     /**
      * inject initial route path for each route html.
      */
